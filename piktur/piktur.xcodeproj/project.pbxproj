@@ -23,6 +23,7 @@
 		3BC60082181C1208001D001C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BC60080181C1208001D001C /* InfoPlist.strings */; };
 		3BC60084181C1208001D001C /* pikturTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60083181C1208001D001C /* pikturTests.m */; };
 		3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60094181C1C2D001D001C /* PKHomeViewController.m */; };
+		3BC60098181C222C001D001C /* PKImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60097181C222C001D001C /* PKImageCell.m */; };
 		99BF9C53B40E40F29C726BFD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1BFC2F35C745DDB0223674 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		3BC60083181C1208001D001C /* pikturTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pikturTests.m; sourceTree = "<group>"; };
 		3BC60093181C1C2D001D001C /* PKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHomeViewController.h; sourceTree = "<group>"; };
 		3BC60094181C1C2D001D001C /* PKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKHomeViewController.m; sourceTree = "<group>"; };
+		3BC60096181C222C001D001C /* PKImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKImageCell.h; sourceTree = "<group>"; };
+		3BC60097181C222C001D001C /* PKImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKImageCell.m; sourceTree = "<group>"; };
 		5B1BFC2F35C745DDB0223674 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573463F8119461D8F5D495C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +136,8 @@
 				3BC6005C181C1208001D001C /* Supporting Files */,
 				3BC60093181C1C2D001D001C /* PKHomeViewController.h */,
 				3BC60094181C1C2D001D001C /* PKHomeViewController.m */,
+				3BC60096181C222C001D001C /* PKImageCell.h */,
+				3BC60097181C222C001D001C /* PKImageCell.m */,
 			);
 			path = piktur;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */,
 				3BC6006F181C1208001D001C /* ViewController.m in Sources */,
 				3BC60066181C1208001D001C /* AppDelegate.m in Sources */,
+				3BC60098181C222C001D001C /* PKImageCell.m in Sources */,
 				3BC60062181C1208001D001C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

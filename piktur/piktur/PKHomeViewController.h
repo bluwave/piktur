@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RFQuiltLayout.h"
 
-@interface PKHomeViewController : UIViewController
+
+@interface PKHomeViewController : UIViewController <RFQuiltLayoutDelegate>
 
 @end
