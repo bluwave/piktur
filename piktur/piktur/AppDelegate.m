@@ -7,12 +7,27 @@
 //
 
 #import "AppDelegate.h"
+#import "PKHomeViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if ([self.window respondsToSelector:@selector(tintColor)])
+        [self.window setTintColor:[UIColor redColor]];
+
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    PKHomeViewController * home = [PKHomeViewController new];
+    [self.window setRootViewController:home];
+//    [ICAppearance applyDefaultStyle];
+
+        [self.window makeKeyAndVisible];
+
+        return YES;
+
     return YES;
 }
 							

@@ -3,4 +3,4 @@ platform :ios, '7.0'
 
 xcodeproj 'piktur/piktur.xcodeproj'
 
-pod 'AFNetworking', '~> 2.0'
+pod 'RFQuiltLayout', '~> 1.1.1'

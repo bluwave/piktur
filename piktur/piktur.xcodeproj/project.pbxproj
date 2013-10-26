@@ -22,6 +22,7 @@
 		3BC6007A181C1208001D001C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC60059181C1208001D001C /* UIKit.framework */; };
 		3BC60082181C1208001D001C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BC60080181C1208001D001C /* InfoPlist.strings */; };
 		3BC60084181C1208001D001C /* pikturTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60083181C1208001D001C /* pikturTests.m */; };
+		3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60094181C1C2D001D001C /* PKHomeViewController.m */; };
 		99BF9C53B40E40F29C726BFD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1BFC2F35C745DDB0223674 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		3BC6007F181C1208001D001C /* pikturTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pikturTests-Info.plist"; sourceTree = "<group>"; };
 		3BC60081181C1208001D001C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3BC60083181C1208001D001C /* pikturTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pikturTests.m; sourceTree = "<group>"; };
+		3BC60093181C1C2D001D001C /* PKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHomeViewController.h; sourceTree = "<group>"; };
+		3BC60094181C1C2D001D001C /* PKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKHomeViewController.m; sourceTree = "<group>"; };
 		5B1BFC2F35C745DDB0223674 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573463F8119461D8F5D495C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +131,8 @@
 				3BC6006E181C1208001D001C /* ViewController.m */,
 				3BC60070181C1208001D001C /* Images.xcassets */,
 				3BC6005C181C1208001D001C /* Supporting Files */,
+				3BC60093181C1C2D001D001C /* PKHomeViewController.h */,
+				3BC60094181C1C2D001D001C /* PKHomeViewController.m */,
 			);
 			path = piktur;
 			sourceTree = "<group>";
@@ -225,8 +230,6 @@
 			mainGroup = 3BC60049181C1208001D001C;
 			productRefGroup = 3BC60053181C1208001D001C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				3BC60051181C1208001D001C /* piktur */,
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */,
 				3BC6006F181C1208001D001C /* ViewController.m in Sources */,
 				3BC60066181C1208001D001C /* AppDelegate.m in Sources */,
 				3BC60062181C1208001D001C /* main.m in Sources */,
@@ -518,6 +522,7 @@
 				3BC60089181C1208001D001C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3BC6008A181C1208001D001C /* Build configuration list for PBXNativeTarget "pikturTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +531,7 @@
 				3BC6008C181C1208001D001C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
