@@ -125,7 +125,7 @@ int num = 0;
     cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
 
     UIImage *ranImg = [self nextRandomImageForSize:cell.contentView.bounds.size];
-    [cell loadImage:ranImg contentMode:UIViewContentMode];
+    [cell loadImage:ranImg contentMode:UIViewContentModeCenter];
 
     return cell;
 
