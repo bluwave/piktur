@@ -1,10 +1,24 @@
 PODS:
+  - FontAwesomeKit (2.0.0):
+    - FontAwesomeKit/Core
+    - FontAwesomeKit/FontAwesome
+    - FontAwesomeKit/FoundationIcons
+    - FontAwesomeKit/Zocial
+  - FontAwesomeKit/Core (2.0.0)
+  - FontAwesomeKit/FontAwesome (2.0.0):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.0.0):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.0.0):
+    - FontAwesomeKit/Core
   - RFQuiltLayout (1.1.1)
 
 DEPENDENCIES:
+  - FontAwesomeKit (~> 2.0.0)
   - RFQuiltLayout (~> 1.1.1)
 
 SPEC CHECKSUMS:
+  FontAwesomeKit: 1602865862190724666a61c9fa915dd2bd76f313
   RFQuiltLayout: 8a3da0aaafcc29430d1a519e3ebb99f06191db40
 
 COCOAPODS: 0.27.1

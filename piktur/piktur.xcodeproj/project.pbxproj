@@ -327,6 +327,14 @@
 		3BC602F5181C2C75001D001C /* IMG_5611.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602A9181C2C75001D001C /* IMG_5611.JPG */; };
 		3BC602F6181C2C75001D001C /* IMG_7155.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602AA181C2C75001D001C /* IMG_7155.JPG */; };
 		3BC602F7181C2C75001D001C /* IMG_7982.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602AB181C2C75001D001C /* IMG_7982.JPG */; };
+		3BC60317181C5040001D001C /* FICDFullscreenPhotoDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60316181C5040001D001C /* FICDFullscreenPhotoDisplayController.m */; };
+		3BC60324181C5FA3001D001C /* PKFlickerPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60323181C5FA3001D001C /* PKFlickerPresentationViewController.m */; };
+		3BC60327181C60A5001D001C /* UIView+PKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60326181C60A5001D001C /* UIView+PKHelpers.m */; };
+		3BC60333181C6DA2001D001C /* ConferenceLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC6032A181C6DA2001D001C /* ConferenceLayoutAttributes.m */; };
+		3BC60334181C6DA2001D001C /* CoverFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC6032C181C6DA2001D001C /* CoverFlowLayout.m */; };
+		3BC60335181C6DA2001D001C /* GridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC6032E181C6DA2001D001C /* GridLayout.m */; };
+		3BC60336181C6DA2001D001C /* LineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60330181C6DA2001D001C /* LineLayout.m */; };
+		3BC60337181C6DA2001D001C /* StacksLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60332181C6DA2001D001C /* StacksLayout.m */; };
 		99BF9C53B40E40F29C726BFD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1BFC2F35C745DDB0223674 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -668,6 +676,22 @@
 		3BC602A9181C2C75001D001C /* IMG_5611.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_5611.JPG; path = piktur/images/random/nz/IMG_5611.JPG; sourceTree = "<group>"; };
 		3BC602AA181C2C75001D001C /* IMG_7155.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_7155.JPG; path = piktur/images/random/nz/IMG_7155.JPG; sourceTree = "<group>"; };
 		3BC602AB181C2C75001D001C /* IMG_7982.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_7982.JPG; path = piktur/images/random/nz/IMG_7982.JPG; sourceTree = "<group>"; };
+		3BC60315181C5040001D001C /* FICDFullscreenPhotoDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICDFullscreenPhotoDisplayController.h; sourceTree = "<group>"; };
+		3BC60316181C5040001D001C /* FICDFullscreenPhotoDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICDFullscreenPhotoDisplayController.m; sourceTree = "<group>"; };
+		3BC60322181C5FA3001D001C /* PKFlickerPresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKFlickerPresentationViewController.h; sourceTree = "<group>"; };
+		3BC60323181C5FA3001D001C /* PKFlickerPresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKFlickerPresentationViewController.m; sourceTree = "<group>"; };
+		3BC60325181C60A5001D001C /* UIView+PKHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PKHelpers.h"; sourceTree = "<group>"; };
+		3BC60326181C60A5001D001C /* UIView+PKHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PKHelpers.m"; sourceTree = "<group>"; };
+		3BC60329181C6DA2001D001C /* ConferenceLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceLayoutAttributes.h; sourceTree = "<group>"; };
+		3BC6032A181C6DA2001D001C /* ConferenceLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceLayoutAttributes.m; sourceTree = "<group>"; };
+		3BC6032B181C6DA2001D001C /* CoverFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverFlowLayout.h; sourceTree = "<group>"; };
+		3BC6032C181C6DA2001D001C /* CoverFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverFlowLayout.m; sourceTree = "<group>"; };
+		3BC6032D181C6DA2001D001C /* GridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridLayout.h; sourceTree = "<group>"; };
+		3BC6032E181C6DA2001D001C /* GridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridLayout.m; sourceTree = "<group>"; };
+		3BC6032F181C6DA2001D001C /* LineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineLayout.h; sourceTree = "<group>"; };
+		3BC60330181C6DA2001D001C /* LineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineLayout.m; sourceTree = "<group>"; };
+		3BC60331181C6DA2001D001C /* StacksLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksLayout.h; sourceTree = "<group>"; };
+		3BC60332181C6DA2001D001C /* StacksLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StacksLayout.m; sourceTree = "<group>"; };
 		5B1BFC2F35C745DDB0223674 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573463F8119461D8F5D495C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -733,6 +757,9 @@
 		3BC6005B181C1208001D001C /* piktur */ = {
 			isa = PBXGroup;
 			children = (
+				3BC60328181C6D71001D001C /* layouts */,
+				3BC60315181C5040001D001C /* FICDFullscreenPhotoDisplayController.h */,
+				3BC60316181C5040001D001C /* FICDFullscreenPhotoDisplayController.m */,
 				3BC60064181C1208001D001C /* AppDelegate.h */,
 				3BC60065181C1208001D001C /* AppDelegate.m */,
 				3BC60067181C1208001D001C /* Main_iPhone.storyboard */,
@@ -745,6 +772,10 @@
 				3BC60094181C1C2D001D001C /* PKHomeViewController.m */,
 				3BC60096181C222C001D001C /* PKImageCell.h */,
 				3BC60097181C222C001D001C /* PKImageCell.m */,
+				3BC60322181C5FA3001D001C /* PKFlickerPresentationViewController.h */,
+				3BC60323181C5FA3001D001C /* PKFlickerPresentationViewController.m */,
+				3BC60325181C60A5001D001C /* UIView+PKHelpers.h */,
+				3BC60326181C60A5001D001C /* UIView+PKHelpers.m */,
 			);
 			path = piktur;
 			sourceTree = "<group>";
@@ -1088,6 +1119,23 @@
 			name = randomImages;
 			sourceTree = "<group>";
 		};
+		3BC60328181C6D71001D001C /* layouts */ = {
+			isa = PBXGroup;
+			children = (
+				3BC60329181C6DA2001D001C /* ConferenceLayoutAttributes.h */,
+				3BC6032A181C6DA2001D001C /* ConferenceLayoutAttributes.m */,
+				3BC6032B181C6DA2001D001C /* CoverFlowLayout.h */,
+				3BC6032C181C6DA2001D001C /* CoverFlowLayout.m */,
+				3BC6032D181C6DA2001D001C /* GridLayout.h */,
+				3BC6032E181C6DA2001D001C /* GridLayout.m */,
+				3BC6032F181C6DA2001D001C /* LineLayout.h */,
+				3BC60330181C6DA2001D001C /* LineLayout.m */,
+				3BC60331181C6DA2001D001C /* StacksLayout.h */,
+				3BC60332181C6DA2001D001C /* StacksLayout.m */,
+			);
+			name = layouts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1136,6 +1184,9 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
+					3BC60051181C1208001D001C = {
+						DevelopmentTeam = 9FBSWYKDXR;
+					};
 					3BC60075181C1208001D001C = {
 						TestTargetID = 3BC60051181C1208001D001C /* piktur */;
 					};
@@ -1524,10 +1575,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */,
+				3BC60334181C6DA2001D001C /* CoverFlowLayout.m in Sources */,
 				3BC6006F181C1208001D001C /* ViewController.m in Sources */,
+				3BC60317181C5040001D001C /* FICDFullscreenPhotoDisplayController.m in Sources */,
+				3BC60335181C6DA2001D001C /* GridLayout.m in Sources */,
 				3BC60066181C1208001D001C /* AppDelegate.m in Sources */,
+				3BC60324181C5FA3001D001C /* PKFlickerPresentationViewController.m in Sources */,
 				3BC60098181C222C001D001C /* PKImageCell.m in Sources */,
+				3BC60333181C6DA2001D001C /* ConferenceLayoutAttributes.m in Sources */,
+				3BC60336181C6DA2001D001C /* LineLayout.m in Sources */,
 				3BC60062181C1208001D001C /* main.m in Sources */,
+				3BC60327181C60A5001D001C /* UIView+PKHelpers.m in Sources */,
+				3BC60337181C6DA2001D001C /* StacksLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1665,10 +1724,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "piktur/piktur-Prefix.pch";
 				INFOPLIST_FILE = "piktur/piktur-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1679,10 +1741,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "piktur/piktur-Prefix.pch";
 				INFOPLIST_FILE = "piktur/piktur-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

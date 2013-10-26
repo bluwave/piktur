@@ -13,6 +13,8 @@
 
 @end
 
+
+
 @implementation PKImageCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -22,6 +24,7 @@
         self.imageView = [[UIImageView alloc] initWithFrame:self.contentView.frame];
         [self.contentView addSubview:self.imageView];
         [self.contentView.layer setMasksToBounds:YES];
+        self.assignedIndex = -1;
     }
     return self;
 }

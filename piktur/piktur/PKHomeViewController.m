@@ -15,17 +15,26 @@
 
 #import "PKHomeViewController.h"
 #import "PKImageCell.h"
+#import "FICDFullscreenPhotoDisplayController.h"
+#import "PKFlickerPresentationViewController.h"
+#import "GridLayout.h"
+#import "LineLayout.h"
+#import "CoverFlowLayout.h"
+#import "StacksLayout.h"
+#import "FAKFontAwesome.h"
 #import <QuartzCore/QuartzCore.h>
 
-const int MAX_PHOTOS = 100;
 
-@interface PKHomeViewController () {
+const int MAX_PHOTOS = 300;
+
+@interface PKHomeViewController () <FICDFullscreenPhotoDisplayControllerDelegate>{
     BOOL isAnimating;
 }
-
+@property(nonatomic, assign) PKLayoutStyle layoutStyle;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray* numbers;
 @property(nonatomic, strong) NSMutableArray *imagePaths;
+@property(nonatomic, strong) NSMutableArray *assignedImagesForCell;
 
 @end
 
@@ -33,18 +42,16 @@ int num = 0;
 
 @implementation PKHomeViewController
 
-//-(void)loadView
-//{
-//    [super loadView];
-//    self.layout = [[RFQuiltLayout alloc] init];
-//    CGRect f = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-//    self.collectionView = [[UICollectionView alloc] initWithFrame:f collectionViewLayout:self.layout];
-//    self.collectionView.autoresizesSubviews =UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    [self.view addSubview:self.collectionView];
-//}
-
 - (void)viewDidLoad {
 
+
+    [self configureNavBar];
+
+    self.title = @"piktur";
+
+    self.assignedImagesForCell = [NSMutableArray arrayWithCapacity:MAX_PHOTOS];
+    for(int i=0; i< MAX_PHOTOS; i++)
+        self.assignedImagesForCell[i] = [NSNull null];
     self.numbers = [@[] mutableCopy];
     for(; num<MAX_PHOTOS; num++) { [self.numbers addObject:@(num)]; }
 
@@ -63,6 +70,28 @@ int num = 0;
 
     [self.collectionView reloadData];
 
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handle3FingerTap:)];
+    tap3.numberOfTouchesRequired = 2;
+    [self.collectionView addGestureRecognizer:tap3];
+
+
+}
+
+- (void)configureNavBar
+{
+    FAKFontAwesome *camIcon = [FAKFontAwesome cameraRetroIconWithSize:20];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(120, 0, 100, 40)];
+    lblTitle.text = @"piktur";
+    lblTitle.backgroundColor = [UIColor clearColor];
+    lblTitle.textColor = [UIColor blackColor];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[camIcon imageWithSize:CGSizeMake(40, 40)]];
+    CGRect f = imgView.frame;
+    f.origin.x = 155;
+    imgView.frame = f;
+    [titleView addSubview:lblTitle];
+    [titleView addSubview:imgView];
+    self.navigationItem.titleView = titleView;
 }
 
 -(void )viewWillAppear:(BOOL)animated
@@ -70,10 +99,13 @@ int num = 0;
     [super viewWillAppear:animated];
 
     self.collectionView.frame =self.view.frame;
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [self.collectionView reloadData];
+
+    [[FICDFullscreenPhotoDisplayController sharedDisplayController] setDelegate:self];
 }
 
 - (IBAction)remove:(id)sender {
@@ -119,33 +151,35 @@ int num = 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     PKImageCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+//    cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
 
-    cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
+    UIImage *img = [self assignedImageForCell:cell atIndexPath:indexPath];
 
-    UIImage *ranImg = [self nextRandomImageForSize:cell.contentView.bounds.size];
-    [cell loadImage:ranImg contentMode:UIViewContentModeCenter];
+    UIViewContentMode mode = [self contentModeForLayout];
 
+    [cell loadImage:img contentMode:mode];
     return cell;
 
 }
 
-       /*typedef NS_ENUM(NSInteger, UIViewContentMode) {
-           UIViewContentModeScaleToFill,
-           UIViewContentModeScaleAspectFit,      // contents scaled to fit with fixed aspect. remainder is transparent
-           UIViewContentModeScaleAspectFill,     // contents scaled to fill with fixed aspect. some portion of content may be clipped.
-           UIViewContentModeRedraw,              // redraw on bounds change (calls -setNeedsDisplay)
-           UIViewContentModeCenter,              // contents remain same size. positioned adjusted.
-           UIViewContentModeTop,
-           UIViewContentModeBottom,
-           UIViewContentModeLeft,
-           UIViewContentModeRight,
-           UIViewContentModeTopLeft,
-           UIViewContentModeTopRight,
-           UIViewContentModeBottomLeft,
-           UIViewContentModeBottomRight,
-       };*/
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%s", __func__);
+    PKImageCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
+//    UIView * snapshotView = [cell.imageView snapshotViewAfterScreenUpdates:YES];
+//    CGSize fittingSize = [snapshotView sizeThatFits:CGSizeZero];
+//    UIGraphicsBeginImageContext(fittingSize);
+//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    [[FICDFullscreenPhotoDisplayController sharedDisplayController] showFullscreenPhoto:cell.imageView.image withThumbnailImageView:cell.imageView];
+
+//    PKFlickerPresentationViewController * flickerVC = [[PKFlickerPresentationViewController alloc] init];
+//    flickerVC.imageToPresent = self.assignedImagesForCell[indexPath.item];
+//    [self.navigationController pushViewController:flickerVC animated:YES];
+}
+
 
 #pragma mark – RFQuiltLayoutDelegate
 
@@ -174,22 +208,42 @@ int num = 0;
 }
 
 
+
+
 #pragma mark - images
+
+-(UIImage*) assignedImageForCell:(UICollectionViewCell*) cell atIndexPath:(NSIndexPath *) indexPath
+{
+    NSInteger  which = indexPath.item;
+    UIImage *img = self.assignedImagesForCell[which];
+
+    if([img isKindOfClass:[NSNull class]])
+    {
+        img = [self nextRandomImageForSize:cell.contentView.bounds.size];
+        self.assignedImagesForCell[which] = img;
+    }
+
+    return img;
+}
+
+-(NSInteger) nextRandomIndex
+{
+    return  arc4random() % self.imagePaths.count;
+}
 
 - (UIImage *)nextRandomImageForSize:(CGSize)size
 {
-//    NSLog(@"%s count: %d", __func__, self.imagePaths.count);
-//    NSLog(@"%s ran: %d", __func__,arc4random() % self.imagePaths.count);
 
     UIImage *img = nil;
     BOOL imageSizeFits = NO;
     NSInteger bailOutAfterCnt = 4;
     NSInteger cnt = 0;
-
+    NSInteger index = [self nextRandomIndex];
     while (!imageSizeFits)
     {
-        NSString *path = self.imagePaths[arc4random() % self.imagePaths.count];
-        img = [UIImage imageNamed:path];
+        NSURL *path = self.imagePaths[index];
+
+        img = [UIImage imageNamed:[path lastPathComponent]];
         imageSizeFits = YES;
         if (img.size.width < size.width || img.size.height < size.height)
         {
@@ -209,19 +263,148 @@ int num = 0;
     if (!self.imagePaths)
     {
         self.imagePaths = [NSMutableArray array];
+        NSArray *directoryContents = [[NSBundle mainBundle] URLsForResourcesWithExtension:@"jpg" subdirectory:nil];
 
-        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-//    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"Documents"];
-        NSError *error = nil;
-        NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
-        for (NSString *p in directoryContents)
+        for (NSURL *p in directoryContents)
         {
-            if ([p rangeOfString:@".jpg"].location != NSNotFound)
-            {
-                [self.imagePaths addObject:p];
-            }
+            [self.imagePaths addObject:p];
         }
     }
+
+
 }
+
+
+#pragma mark - FICDPhotosTableViewCellDelegate
+//[[FICDFullscreenPhotoDisplayController sharedDisplayController] showFullscreenPhoto:photo withThumbnailImageView:imageView];
+
+
+#pragma mark - FICDFullscreenPhotoDisplayControllerDelegate
+
+- (void)photoDisplayController:(FICDFullscreenPhotoDisplayController *)photoDisplayController willShowSourceImage:(UIImage *)sourceImage forPhoto:(FICDPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
+    // If we're running on iOS 7, we'll try to intelligently determine whether the photo contents underneath the status bar is light or dark.
+    if ([self respondsToSelector:@selector(preferredStatusBarStyle)]) {
+    }
+
+    
+}
+
+
+- (void)photoDisplayController:(FICDFullscreenPhotoDisplayController *)photoDisplayController willHideSourceImage:(UIImage *)sourceImage forPhoto:(FICDPhoto *)photo withThumbnailImageView:(UIImageView *)thumbnailImageView {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+}
+
+#pragma mark - scroll view
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+//    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^
+//    {
+//        [self.navigationController.navigationBar setHidden:YES];
+//    }                completion:nil];
+//    [self.navigationController.navigationBar setHidden:YES];
+}
+
+#pragma mark - layouts
+
+-(UIViewContentMode) contentModeForLayout
+{
+    switch (self.layoutStyle)
+    {
+        case PKLayoutStyleQuilt:
+            return UIViewContentModeCenter;
+        case PKLayoutStyleCoverFlow:
+            return UIViewContentModeCenter;
+        case PKLayoutStyleLine:
+            return UIViewContentModeCenter;
+
+        default:
+            return UIViewContentModeCenter;
+    }
+}
+
+- (void)setLayoutStyle:(PKLayoutStyle)layoutStyle animated:(BOOL)animated
+{
+    if (layoutStyle == self.layoutStyle)
+        return;
+
+    UICollectionViewLayout *newLayout = nil;
+    BOOL delayedInvalidate = NO;
+
+    switch (layoutStyle)
+    {
+        case PKLayoutStyleGrid:
+            newLayout = [[GridLayout alloc] init];
+            break;
+
+        case PKLayoutStyleLine:
+            newLayout = [[LineLayout alloc] init];
+            delayedInvalidate = YES;
+            break;
+
+        case PKLayoutStyleCoverFlow:
+            newLayout = [[CoverFlowLayout alloc] init];
+            delayedInvalidate = YES;
+
+            break;
+        case PKLayoutStyleQuilt:
+        {
+            RFQuiltLayout *layout = [[RFQuiltLayout alloc] init];
+//            layout.direction = UICollectionViewScrollDirectionVertical;
+//            layout.blockPixels = CGSizeMake(100, 100);
+            layout.delegate = self;
+            newLayout = layout;
+            delayedInvalidate = YES;
+            break;
+        }
+
+//        case SpeakerLayoutStacks:
+//            newLayout = [[StacksLayout alloc] init];
+//            break;
+
+        default:
+            break;
+    }
+
+    if (!newLayout)
+        return;
+
+    self.layoutStyle = layoutStyle;
+    [self.collectionView setCollectionViewLayout:newLayout animated:animated];
+//    self.collectionView.pagingEnabled = (layoutStyle == SpeakerLayoutSpiral);
+    self.collectionView.pagingEnabled = NO;
+
+    if (delayedInvalidate)
+    {
+        [self.collectionView.collectionViewLayout performSelector:@selector(invalidateLayout) withObject:nil afterDelay:0.4];
+    }
+
+    // WORKAROUND: There's a UICollectionView bug where the supplementary views from StacksLayout are leftover and remain in other layouts
+    /*if (layoutStyle != SpeakerLayoutStacks)
+    {
+        NSMutableArray *leftoverViews = [NSMutableArray array];
+        for (UIView *subview in self.collectionView.subviews)
+        {
+            // Find all the leftover supplementary views
+            if ([subview isKindOfClass:[SmallConferenceHeader class]])
+            {
+                [leftoverViews addObject:subview];
+            }
+        }
+
+        // remove them from the view hierarchy
+        for (UIView *subview in leftoverViews)
+            [subview removeFromSuperview];
+    }*/
+}
+
+- (void)handle3FingerTap:(UITapGestureRecognizer *)gestureRecognizer
+{
+    PKLayoutStyle newLayout = self.layoutStyle + 1;
+    if (newLayout >= SpeakerLayoutCount)
+        newLayout = 0;
+    [self setLayoutStyle:newLayout animated:YES];
+
+}
+
 
 @end

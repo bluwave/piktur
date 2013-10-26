@@ -4,3 +4,4 @@ platform :ios, '7.0'
 xcodeproj 'piktur/piktur.xcodeproj'
 
 pod 'RFQuiltLayout', '~> 1.1.1'
+pod 'FontAwesomeKit', '~> 2.0.0'

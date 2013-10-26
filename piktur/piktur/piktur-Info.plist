@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bluewav.es.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.truliainc.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -28,7 +28,6 @@
 	<string>Main_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main_iPad</string>
-	
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
