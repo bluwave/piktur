@@ -14,7 +14,10 @@
 //
 
 #import "PKHomeViewController.h"
+#import "PKImageCell.h"
 #import <QuartzCore/QuartzCore.h>
+
+const int MAX_PHOTOS = 100;
 
 @interface PKHomeViewController () {
     BOOL isAnimating;
@@ -22,6 +25,8 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray* numbers;
+@property(nonatomic, strong) NSMutableArray *imagePaths;
+
 @end
 
 int num = 0;
@@ -41,17 +46,23 @@ int num = 0;
 - (void)viewDidLoad {
 
     self.numbers = [@[] mutableCopy];
-    for(; num<10; num++) { [self.numbers addObject:@(num)]; }
+    for(; num<MAX_PHOTOS; num++) { [self.numbers addObject:@(num)]; }
 
 
     NSLog(@"%s cv: %@", __func__, self.collectionView);
 
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[PKImageCell class] forCellWithReuseIdentifier:@"cell"];
     RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
     layout.direction = UICollectionViewScrollDirectionVertical;
     layout.blockPixels = CGSizeMake(100, 100);
 
+    [self loadImagePaths];
+
+//    [self.view setBackgroundColor:[UIColor whiteColor]];
+
     [self.collectionView reloadData];
+
 }
 
 -(void )viewWillAppear:(BOOL)animated
@@ -108,20 +119,33 @@ int num = 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    PKImageCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+
     cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
 
-    UILabel* label = (id)[cell viewWithTag:5];
-    if(!label) label = [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 30, 20)];
-    label.tag = 5;
-    label.textColor = [UIColor blackColor];
-    label.text = [NSString stringWithFormat:@"%@", self.numbers[indexPath.row]];
-    label.backgroundColor = [UIColor clearColor];
-    [cell addSubview:label];
+    UIImage *ranImg = [self nextRandomImageForSize:cell.contentView.bounds.size];
+    [cell loadImage:ranImg contentMode:UIViewContentMode];
 
     return cell;
+
 }
 
+       /*typedef NS_ENUM(NSInteger, UIViewContentMode) {
+           UIViewContentModeScaleToFill,
+           UIViewContentModeScaleAspectFit,      // contents scaled to fit with fixed aspect. remainder is transparent
+           UIViewContentModeScaleAspectFill,     // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+           UIViewContentModeRedraw,              // redraw on bounds change (calls -setNeedsDisplay)
+           UIViewContentModeCenter,              // contents remain same size. positioned adjusted.
+           UIViewContentModeTop,
+           UIViewContentModeBottom,
+           UIViewContentModeLeft,
+           UIViewContentModeRight,
+           UIViewContentModeTopLeft,
+           UIViewContentModeTopRight,
+           UIViewContentModeBottomLeft,
+           UIViewContentModeBottomRight,
+       };*/
 
 #pragma mark – RFQuiltLayoutDelegate
 
@@ -149,5 +173,55 @@ int num = 0;
     return UIEdgeInsetsMake(2, 2, 2, 2);
 }
 
+
+#pragma mark - images
+
+- (UIImage *)nextRandomImageForSize:(CGSize)size
+{
+//    NSLog(@"%s count: %d", __func__, self.imagePaths.count);
+//    NSLog(@"%s ran: %d", __func__,arc4random() % self.imagePaths.count);
+
+    UIImage *img = nil;
+    BOOL imageSizeFits = NO;
+    NSInteger bailOutAfterCnt = 4;
+    NSInteger cnt = 0;
+
+    while (!imageSizeFits)
+    {
+        NSString *path = self.imagePaths[arc4random() % self.imagePaths.count];
+        img = [UIImage imageNamed:path];
+        imageSizeFits = YES;
+        if (img.size.width < size.width || img.size.height < size.height)
+        {
+            NSLog(@"%s *** img is tool small for cell size: %@", __func__, NSStringFromCGSize(size));
+            imageSizeFits = NO;
+        }
+        cnt++;
+        if (cnt == bailOutAfterCnt)
+            imageSizeFits = YES;
+    }
+
+    return img;
+}
+
+-(void) loadImagePaths
+{
+    if (!self.imagePaths)
+    {
+        self.imagePaths = [NSMutableArray array];
+
+        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+//    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"Documents"];
+        NSError *error = nil;
+        NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
+        for (NSString *p in directoryContents)
+        {
+            if ([p rangeOfString:@".jpg"].location != NSNotFound)
+            {
+                [self.imagePaths addObject:p];
+            }
+        }
+    }
+}
 
 @end
