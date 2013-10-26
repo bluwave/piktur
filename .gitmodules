@@ -1,0 +1,3 @@
+[submodule "piktur/lib/FastImageCache"]
+	path = piktur/lib/FastImageCache
+	url = https://github.com/path/FastImageCache.git

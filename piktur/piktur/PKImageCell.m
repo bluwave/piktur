@@ -7,9 +7,12 @@
 //
 
 #import "PKImageCell.h"
+#import "FICImageCache.h"
+#import "FICDPhoto.h"
+
 
 @interface PKImageCell()
-
+@property(nonatomic, weak) id<FICEntity> photo;
 
 @end
 
@@ -26,6 +29,23 @@
     return self;
 }
 
+-(void)loadPhoto:(id <FICEntity>)photo
+{
+    self.photo = photo;
+    __weak __typeof__ (self) weakself = self;
+    [[FICImageCache sharedImageCache] retrieveImageForEntity:photo withFormatName:FICDPhotoSquareImageFormatName completionBlock:^(id <FICEntity> entity, NSString *formatName, UIImage *image)
+    {
+        // This completion block may be called much later. We should check to make sure this cell hasn't been reused for different photos before displaying the image that has loaded.
+
+        NSLog(@"%s imag size; %@", __func__, NSStringFromCGSize(image.size));
+        if (photo == [weakself photo])
+        {
+            if (weakself)
+                [weakself.imageView setContentMode:UIViewContentModeCenter];
+                [weakself.imageView setImage:image];
+        }
+    }];
+}
 
 
 -(void) loadImage:(UIImage * ) img contentMode:(UIViewContentMode) mode

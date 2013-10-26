@@ -327,6 +327,13 @@
 		3BC602F5181C2C75001D001C /* IMG_5611.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602A9181C2C75001D001C /* IMG_5611.JPG */; };
 		3BC602F6181C2C75001D001C /* IMG_7155.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602AA181C2C75001D001C /* IMG_7155.JPG */; };
 		3BC602F7181C2C75001D001C /* IMG_7982.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3BC602AB181C2C75001D001C /* IMG_7982.JPG */; };
+		3BC60309181C3070001D001C /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC602FC181C3070001D001C /* FICImageCache.m */; };
+		3BC6030A181C3070001D001C /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC602FF181C3070001D001C /* FICImageFormat.m */; };
+		3BC6030B181C3070001D001C /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60301181C3070001D001C /* FICImageTable.m */; };
+		3BC6030C181C3070001D001C /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60303181C3070001D001C /* FICImageTableChunk.m */; };
+		3BC6030D181C3070001D001C /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60305181C3070001D001C /* FICImageTableEntry.m */; };
+		3BC6030E181C3070001D001C /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60308181C3070001D001C /* FICUtilities.m */; };
+		3BC60312181C3449001D001C /* FICDPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC60311181C3449001D001C /* FICDPhoto.m */; };
 		99BF9C53B40E40F29C726BFD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1BFC2F35C745DDB0223674 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -668,6 +675,23 @@
 		3BC602A9181C2C75001D001C /* IMG_5611.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_5611.JPG; path = piktur/images/random/nz/IMG_5611.JPG; sourceTree = "<group>"; };
 		3BC602AA181C2C75001D001C /* IMG_7155.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_7155.JPG; path = piktur/images/random/nz/IMG_7155.JPG; sourceTree = "<group>"; };
 		3BC602AB181C2C75001D001C /* IMG_7982.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_7982.JPG; path = piktur/images/random/nz/IMG_7982.JPG; sourceTree = "<group>"; };
+		3BC602FA181C3070001D001C /* FICEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICEntity.h; path = lib/FastImageCache/FastImageCache/FICEntity.h; sourceTree = "<group>"; };
+		3BC602FB181C3070001D001C /* FICImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImageCache.h; path = lib/FastImageCache/FastImageCache/FICImageCache.h; sourceTree = "<group>"; };
+		3BC602FC181C3070001D001C /* FICImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICImageCache.m; path = lib/FastImageCache/FastImageCache/FICImageCache.m; sourceTree = "<group>"; };
+		3BC602FD181C3070001D001C /* FICImageCache+FICErrorLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FICImageCache+FICErrorLogging.h"; path = "lib/FastImageCache/FastImageCache/FICImageCache+FICErrorLogging.h"; sourceTree = "<group>"; };
+		3BC602FE181C3070001D001C /* FICImageFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImageFormat.h; path = lib/FastImageCache/FastImageCache/FICImageFormat.h; sourceTree = "<group>"; };
+		3BC602FF181C3070001D001C /* FICImageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICImageFormat.m; path = lib/FastImageCache/FastImageCache/FICImageFormat.m; sourceTree = "<group>"; };
+		3BC60300181C3070001D001C /* FICImageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImageTable.h; path = lib/FastImageCache/FastImageCache/FICImageTable.h; sourceTree = "<group>"; };
+		3BC60301181C3070001D001C /* FICImageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICImageTable.m; path = lib/FastImageCache/FastImageCache/FICImageTable.m; sourceTree = "<group>"; };
+		3BC60302181C3070001D001C /* FICImageTableChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImageTableChunk.h; path = lib/FastImageCache/FastImageCache/FICImageTableChunk.h; sourceTree = "<group>"; };
+		3BC60303181C3070001D001C /* FICImageTableChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICImageTableChunk.m; path = lib/FastImageCache/FastImageCache/FICImageTableChunk.m; sourceTree = "<group>"; };
+		3BC60304181C3070001D001C /* FICImageTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImageTableEntry.h; path = lib/FastImageCache/FastImageCache/FICImageTableEntry.h; sourceTree = "<group>"; };
+		3BC60305181C3070001D001C /* FICImageTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICImageTableEntry.m; path = lib/FastImageCache/FastImageCache/FICImageTableEntry.m; sourceTree = "<group>"; };
+		3BC60306181C3070001D001C /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICImports.h; path = lib/FastImageCache/FastImageCache/FICImports.h; sourceTree = "<group>"; };
+		3BC60307181C3070001D001C /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FICUtilities.h; path = lib/FastImageCache/FastImageCache/FICUtilities.h; sourceTree = "<group>"; };
+		3BC60308181C3070001D001C /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FICUtilities.m; path = lib/FastImageCache/FastImageCache/FICUtilities.m; sourceTree = "<group>"; };
+		3BC60310181C3449001D001C /* FICDPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICDPhoto.h; sourceTree = "<group>"; };
+		3BC60311181C3449001D001C /* FICDPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICDPhoto.m; sourceTree = "<group>"; };
 		5B1BFC2F35C745DDB0223674 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573463F8119461D8F5D495C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -700,6 +724,7 @@
 		3BC60049181C1208001D001C = {
 			isa = PBXGroup;
 			children = (
+				3BC602F8181C301D001D001C /* lib */,
 				3BC60099181C2426001D001C /* randomImages */,
 				3BC6005B181C1208001D001C /* piktur */,
 				3BC6007D181C1208001D001C /* pikturTests */,
@@ -733,18 +758,13 @@
 		3BC6005B181C1208001D001C /* piktur */ = {
 			isa = PBXGroup;
 			children = (
+				3BC60314181C3470001D001C /* xibs */,
+				3BC60313181C3456001D001C /* ViewController */,
+				3BC6030F181C343B001D001C /* View */,
 				3BC60064181C1208001D001C /* AppDelegate.h */,
 				3BC60065181C1208001D001C /* AppDelegate.m */,
-				3BC60067181C1208001D001C /* Main_iPhone.storyboard */,
-				3BC6006A181C1208001D001C /* Main_iPad.storyboard */,
-				3BC6006D181C1208001D001C /* ViewController.h */,
-				3BC6006E181C1208001D001C /* ViewController.m */,
 				3BC60070181C1208001D001C /* Images.xcassets */,
 				3BC6005C181C1208001D001C /* Supporting Files */,
-				3BC60093181C1C2D001D001C /* PKHomeViewController.h */,
-				3BC60094181C1C2D001D001C /* PKHomeViewController.m */,
-				3BC60096181C222C001D001C /* PKImageCell.h */,
-				3BC60097181C222C001D001C /* PKImageCell.m */,
 			);
 			path = piktur;
 			sourceTree = "<group>";
@@ -1086,6 +1106,67 @@
 				3BC6013A181C2442001D001C /* images%252520%25252822%252529.jpg */,
 			);
 			name = randomImages;
+			sourceTree = "<group>";
+		};
+		3BC602F8181C301D001D001C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				3BC602F9181C3024001D001C /* FastImageCaching */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		3BC602F9181C3024001D001C /* FastImageCaching */ = {
+			isa = PBXGroup;
+			children = (
+				3BC602FA181C3070001D001C /* FICEntity.h */,
+				3BC602FB181C3070001D001C /* FICImageCache.h */,
+				3BC602FC181C3070001D001C /* FICImageCache.m */,
+				3BC602FD181C3070001D001C /* FICImageCache+FICErrorLogging.h */,
+				3BC602FE181C3070001D001C /* FICImageFormat.h */,
+				3BC602FF181C3070001D001C /* FICImageFormat.m */,
+				3BC60300181C3070001D001C /* FICImageTable.h */,
+				3BC60301181C3070001D001C /* FICImageTable.m */,
+				3BC60302181C3070001D001C /* FICImageTableChunk.h */,
+				3BC60303181C3070001D001C /* FICImageTableChunk.m */,
+				3BC60304181C3070001D001C /* FICImageTableEntry.h */,
+				3BC60305181C3070001D001C /* FICImageTableEntry.m */,
+				3BC60306181C3070001D001C /* FICImports.h */,
+				3BC60307181C3070001D001C /* FICUtilities.h */,
+				3BC60308181C3070001D001C /* FICUtilities.m */,
+			);
+			name = FastImageCaching;
+			sourceTree = "<group>";
+		};
+		3BC6030F181C343B001D001C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3BC60096181C222C001D001C /* PKImageCell.h */,
+				3BC60097181C222C001D001C /* PKImageCell.m */,
+				3BC60310181C3449001D001C /* FICDPhoto.h */,
+				3BC60311181C3449001D001C /* FICDPhoto.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3BC60313181C3456001D001C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3BC60093181C1C2D001D001C /* PKHomeViewController.h */,
+				3BC60094181C1C2D001D001C /* PKHomeViewController.m */,
+				3BC6006D181C1208001D001C /* ViewController.h */,
+				3BC6006E181C1208001D001C /* ViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		3BC60314181C3470001D001C /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				3BC60067181C1208001D001C /* Main_iPhone.storyboard */,
+				3BC6006A181C1208001D001C /* Main_iPad.storyboard */,
+			);
+			name = xibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1524,10 +1605,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC60095181C1C2D001D001C /* PKHomeViewController.m in Sources */,
+				3BC6030C181C3070001D001C /* FICImageTableChunk.m in Sources */,
 				3BC6006F181C1208001D001C /* ViewController.m in Sources */,
 				3BC60066181C1208001D001C /* AppDelegate.m in Sources */,
+				3BC60309181C3070001D001C /* FICImageCache.m in Sources */,
 				3BC60098181C222C001D001C /* PKImageCell.m in Sources */,
+				3BC60312181C3449001D001C /* FICDPhoto.m in Sources */,
+				3BC6030E181C3070001D001C /* FICUtilities.m in Sources */,
+				3BC6030A181C3070001D001C /* FICImageFormat.m in Sources */,
 				3BC60062181C1208001D001C /* main.m in Sources */,
+				3BC6030D181C3070001D001C /* FICImageTableEntry.m in Sources */,
+				3BC6030B181C3070001D001C /* FICImageTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

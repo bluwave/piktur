@@ -15,11 +15,13 @@
 
 #import "PKHomeViewController.h"
 #import "PKImageCell.h"
+#import "FICDPhoto.h"
+#import "FICImageCache.h"
 #import <QuartzCore/QuartzCore.h>
 
 const int MAX_PHOTOS = 100;
 
-@interface PKHomeViewController () {
+@interface PKHomeViewController ()<FICImageCacheDelegate> {
     BOOL isAnimating;
 }
 
@@ -44,6 +46,8 @@ int num = 0;
 //}
 
 - (void)viewDidLoad {
+
+    [self configureImageCache];
 
     self.numbers = [@[] mutableCopy];
     for(; num<MAX_PHOTOS; num++) { [self.numbers addObject:@(num)]; }
@@ -124,28 +128,28 @@ int num = 0;
 
     cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
 
-    UIImage *ranImg = [self nextRandomImageForSize:cell.contentView.bounds.size];
-    [cell loadImage:ranImg contentMode:UIViewContentMode];
+    id <FICEntity> ranImg = [self nextRandomImageForSize:cell.contentView.bounds.size];
+    [cell loadPhoto:ranImg];
 
     return cell;
 
 }
 
-       /*typedef NS_ENUM(NSInteger, UIViewContentMode) {
-           UIViewContentModeScaleToFill,
-           UIViewContentModeScaleAspectFit,      // contents scaled to fit with fixed aspect. remainder is transparent
-           UIViewContentModeScaleAspectFill,     // contents scaled to fill with fixed aspect. some portion of content may be clipped.
-           UIViewContentModeRedraw,              // redraw on bounds change (calls -setNeedsDisplay)
-           UIViewContentModeCenter,              // contents remain same size. positioned adjusted.
-           UIViewContentModeTop,
-           UIViewContentModeBottom,
-           UIViewContentModeLeft,
-           UIViewContentModeRight,
-           UIViewContentModeTopLeft,
-           UIViewContentModeTopRight,
-           UIViewContentModeBottomLeft,
-           UIViewContentModeBottomRight,
-       };*/
+-(void) loadImageForCellAtIndexPath:(NSIndexPath *) indexPath
+{
+
+//    NSString *formatName = XXImageFormatNameUserThumbnailSmall;
+//    FICImageCacheCompletionBlock completionBlock = ^(id <FICEntity> entity, NSString *formatName, UIImage *image) {
+//        _imageView.image = image;
+//        [_imageView.layer addAnimation:[CATransition animation] forKey:kCATransition];
+//    };
+//
+//    BOOL imageExists = [sharedImageCache retrieveImageForEntity:user withFormatName:formatName completionBlock:completionBlock];
+//
+//    if (imageExists == NO) {
+//        _imageView.image = [self _userPlaceholderImage];
+//    }
+}
 
 #pragma mark – RFQuiltLayoutDelegate
 
@@ -175,8 +179,18 @@ int num = 0;
 
 
 #pragma mark - images
+- (NSInteger)nextRandomImageIndex
+{
+    return arc4random() % self.imagePaths.count;
+}
 
-- (UIImage *)nextRandomImageForSize:(CGSize)size
+- (id<FICEntity>)nextRandomImageForSize:(CGSize)size
+{
+    id <FICEntity> photo = self.imagePaths[arc4random() % self.imagePaths.count];
+    return photo;
+}
+
+/*- (UIImage *)nextRandomImageForSize:(CGSize)size
 {
 //    NSLog(@"%s count: %d", __func__, self.imagePaths.count);
 //    NSLog(@"%s ran: %d", __func__,arc4random() % self.imagePaths.count);
@@ -202,26 +216,111 @@ int num = 0;
     }
 
     return img;
-}
+}*/
 
 -(void) loadImagePaths
 {
     if (!self.imagePaths)
     {
         self.imagePaths = [NSMutableArray array];
+        NSArray *directoryContents = [[NSBundle mainBundle] URLsForResourcesWithExtension:@"jpg" subdirectory:nil];
 
-        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-//    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"Documents"];
-        NSError *error = nil;
-        NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
-        for (NSString *p in directoryContents)
+        for (NSURL *p in directoryContents)
         {
-            if ([p rangeOfString:@".jpg"].location != NSNotFound)
-            {
-                [self.imagePaths addObject:p];
-            }
+            FICDPhoto *photo = [[FICDPhoto alloc] init];
+            [photo setSourceImageURL:p];
+            [self.imagePaths addObject:photo];
         }
     }
+
+
+    dispatch_block_t callbackReloadCollectionView = ^
+    {
+        [self.collectionView reloadData];
+    };
+
+    FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
+    {
+        NSSet *uniquePhotos = [NSSet setWithArray:self.imagePaths];
+        __block NSInteger callbackCnt = 0;
+        CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+        for (FICDPhoto *photo in uniquePhotos)
+        {
+            if ([sharedImageCache imageExistsForEntity:photo withFormatName:FICDPhotoSquareImageFormatName] == NO)
+            {
+                callbackCnt++;
+                [sharedImageCache asynchronouslyRetrieveImageForEntity:photo withFormatName:FICDPhotoSquareImageFormatName completionBlock:^(id <FICEntity> entity, NSString *formatName, UIImage *image)
+                {
+                    NSLog(@"%s image: %@", __func__, image);
+                    callbackCnt--;
+                    if (callbackCnt == 0)
+                    {
+                        NSLog(@"*** FIC Demo: Fast Image Cache: Generated thumbnails in %g seconds", CFAbsoluteTimeGetCurrent() - startTime);
+                        dispatch_async(dispatch_get_main_queue(), callbackReloadCollectionView);
+                    }
+                }];
+            }
+        }
+    });
+
+}
+
+
+
+#pragma mark - FICImageCacheDelegate
+
+-(void) configureImageCache
+{
+    NSMutableArray *mutableImageFormats = [NSMutableArray array];
+
+    // Square image format
+    NSInteger squareImageFormatMaximumCount = 400;
+    FICImageFormatDevices squareImageFormatDevices = FICImageFormatDevicePhone | FICImageFormatDevicePad;
+
+    FICImageFormat *squareImageFormat = [FICImageFormat formatWithName:FICDPhotoSquareImageFormatName family:FICDPhotoImageFormatFamily imageSize:FICDPhotoSquareImageSize style:FICImageFormatStyle32BitBGRA
+                                                          maximumCount:squareImageFormatMaximumCount devices:squareImageFormatDevices];
+
+    [mutableImageFormats addObject:squareImageFormat];
+
+    if ([UIViewController instancesRespondToSelector:@selector(preferredStatusBarStyle)])
+    {
+        // Pixel image format
+        NSInteger pixelImageFormatMaximumCount = 1000;
+        FICImageFormatDevices pixelImageFormatDevices = FICImageFormatDevicePhone | FICImageFormatDevicePad;
+
+        FICImageFormat *pixelImageFormat = [FICImageFormat formatWithName:FICDPhotoPixelImageFormatName family:FICDPhotoImageFormatFamily imageSize:FICDPhotoPixelImageSize style:FICImageFormatStyle32BitBGRA
+                                                             maximumCount:pixelImageFormatMaximumCount devices:pixelImageFormatDevices];
+
+        [mutableImageFormats addObject:pixelImageFormat];
+    }
+
+    // Configure the image cache
+    FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+    [sharedImageCache setDelegate:self];
+    [sharedImageCache setFormats:mutableImageFormats];
+}
+
+
+- (void)imageCache:(FICImageCache *)imageCache wantsSourceImageForEntity:(id<FICEntity>)entity withFormatName:(NSString *)formatName completionBlock:(FICImageRequestCompletionBlock)completionBlock {
+    // Images typically come from the Internet rather than from the app bundle directly, so this would be the place to fire off a network request to download the image.
+    // For the purposes of this demo app, we'll just access images stored locally on disk.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *sourceImage = [(FICDPhoto *)entity sourceImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(sourceImage);
+        });
+    });
+}
+
+- (BOOL)imageCache:(FICImageCache *)imageCache shouldProcessAllFormatsInFamily:(NSString *)formatFamily forEntity:(id<FICEntity>)entity {
+    BOOL shouldProcessAllFormats = [formatFamily isEqualToString:FICDPhotoImageFormatFamily];
+
+    return shouldProcessAllFormats;
+}
+
+- (void)imageCache:(FICImageCache *)imageCache errorDidOccurWithMessage:(NSString *)errorMessage {
+    NSLog(@"%@", errorMessage);
 }
 
 @end
